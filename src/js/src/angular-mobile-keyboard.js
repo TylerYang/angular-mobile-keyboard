@@ -1,5 +1,4 @@
 (function(global) {
-    console.log("test");
     var keyboardApp = angular.module("ngMobileKeyboard", []);
     var config = {
         kbId: "virtualKb",
@@ -39,6 +38,13 @@
                         keyboardTypes: kbTypes 
                     });
                 });
+                
+                if(config.dev) {
+                    setTimeout(function() {
+                        ele[0].focus();
+                        window.ele = ele[0];
+                    });
+                }
             }
         }
     }]);

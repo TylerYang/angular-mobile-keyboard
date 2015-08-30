@@ -1,5 +1,4 @@
 (function(global) {
-    console.log("test");
     var keyboardApp = angular.module("ngMobileKeyboard", []);
     var config = {
         kbId: "virtualKb",
@@ -39,6 +38,13 @@
                         keyboardTypes: kbTypes 
                     });
                 });
+                
+                if(config.dev) {
+                    setTimeout(function() {
+                        ele[0].focus();
+                        window.ele = ele[0];
+                    });
+                }
             }
         }
     }]);
@@ -182,4 +188,4 @@
     }
 })(window);
 
-angular.module("ngMobileKeyboard").run(["$templateCache", function($templateCache) {$templateCache.put("template/ngKeyboard.html","<div id=\"virtualKb\" class=\"kb-ctner\" ng-class=\"{\'active\': showKeyboard}\">\n    <ul ng-show=\"showCurrKb(\'ABC\')\">\n        <li>\n            <button>Q</button>\n            <button>W</button>\n            <button>E</button>\n            <button>R</button>\n            <button>T</button>\n            <button>Y</button>\n            <button>U</button>\n            <button>I</button>\n            <button>O</button>\n            <button>P</button>\n        </li>\n        <li>\n            <button>A</button>\n            <button>S</button>\n            <button>D</button>\n            <button>F</button>\n            <button>G</button>\n            <button>H</button>\n            <button>J</button>\n            <button>K</button>\n            <button>L</button>\n        </li>\n        <li>\n            <button class=\"func pull-left\" ng-class=\"{\'active\': isCap}\" data-func=\"caps\">Caps</button>\n            <button>Z</button>\n            <button>X</button>\n            <button>C</button>\n            <button>V</button>\n            <button>B</button>\n            <button>N</button>\n            <button>M</button>\n            <button class=\"func pull-right\" data-func=\"backspace\">DEL</button>\n        </li>\n        <li>\n            <button class=\"func\">123</button>\n            <button class=\"func\">SMILE</button>\n            <button class=\"space\" data-value=\" \">space</button>\n            <button>.</button>\n            <button class=\"func enter\" data-func=\"enter\">Go</button>\n        </li>\n    </ul>\n\n</div>\n");}]);
+angular.module("ngMobileKeyboard").run(["$templateCache", function($templateCache) {$templateCache.put("template/ngKeyboard.html","<div id=\"virtualKb\" class=\"kb-ctner\" ng-class=\"{\'active\': showKeyboard}\">\n    <ul ng-show=\"showCurrKb(\'ABC\')\">\n        <li>\n            <button>Q</button>\n            <button>W</button>\n            <button>E</button>\n            <button>R</button>\n            <button>T</button>\n            <button>Y</button>\n            <button>U</button>\n            <button>I</button>\n            <button>O</button>\n            <button>P</button>\n        </li>\n        <li>\n            <button>A</button>\n            <button>S</button>\n            <button>D</button>\n            <button>F</button>\n            <button>G</button>\n            <button>H</button>\n            <button>J</button>\n            <button>K</button>\n            <button>L</button>\n        </li>\n        <li>\n            <button class=\"func button-caps pull-left\" ng-class=\"{\'active\': isCap}\" data-func=\"caps\">Caps</button>\n            <button>Z</button>\n            <button>X</button>\n            <button>C</button>\n            <button>V</button>\n            <button>B</button>\n            <button>N</button>\n            <button>M</button>\n            <button class=\"func button-del pull-right\" data-func=\"backspace\">DEL</button>\n        </li>\n        <li>\n            <button class=\"func switch\" data-func=\"switch\">123</button>\n            <button class=\"func\">SMILE</button>\n            <button class=\"space\" data-value=\" \">space</button>\n            <button>.</button>\n            <button class=\"func enter\" data-func=\"enter\">Go</button>\n        </li>\n    </ul>\n\n</div>\n");}]);

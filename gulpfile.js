@@ -25,10 +25,16 @@ gulp.task("gen-demo-style", function() {
         .pipe(connect.reload());
 });
 
-gulp.task("concat", function() {
+gulp.task("gen-scripts", function() {
     return streamqueue({objectMode: true}, gulp.src(["./src/js/src/**/*.js"]), getTemplateStream())
         .pipe(concat("angular-mobile-keyboard.js"))
         .pipe(gulp.dest("./dist/js/"))
+        .pipe(connect.reload());
+});
+
+gulp.task("copy-images", function() {
+    return gulp.src("./src/images/**/*")
+        .pipe(gulp.dest("./dist/images/"))
         .pipe(connect.reload());
 });
 
@@ -40,7 +46,9 @@ gulp.task("auto-gen", function() {
     //auto gen example basic style
     gulp.watch("./example/css/**/*.styl",["gen-demo-style"]);
     //auto gen scripts 
-    gulp.watch(["./src/js/src/**.js", "./src/template/**/*.html"], ["concat"]);
+    gulp.watch(["./src/js/src/**.js", "./src/template/**/*.html"], ["gen-scripts"]);
+    //auto copy images
+    gulp.watch("./src/images/**/*",["copy-images"]);
 });
 
 gulp.task("connect", function(){
@@ -61,6 +69,6 @@ function getTemplateStream() {
         .pipe(templateCache(options));
 }
 
-gulp.task("default", ["clean", "gen-style", "concat"]);
+gulp.task("default", ["clean", "gen-style", "gen-scripts", "copy-images"]);
 
-gulp.task("dev", ["clean", "gen-style", "concat", "connect", "auto-gen"]);
+gulp.task("dev", ["clean", "gen-style", "gen-scripts", "copy-images", "connect", "auto-gen"]);
