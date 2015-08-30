@@ -1,4 +1,5 @@
 (function(global) {
+    console.log("test");
     var keyboardApp = angular.module("ngMobileKeyboard", []);
     var config = {
         kbId: "virtualKb",

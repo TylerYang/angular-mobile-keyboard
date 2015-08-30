@@ -2,8 +2,8 @@
 <html ng-app="myApp">
     <head>
         <title>Virtual mobile demo</title>
-        <link rel="stylesheet" type="text/css" href="css/keyboard.css" />
-        <link rel="stylesheet" type="text/css" href="css/basic.css" />
+        <link rel="stylesheet" type="text/css" href="./css/basic.css" />
+        <link rel="stylesheet" type="text/css" href="../dist/css/keyboard.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-stype" content="blank">
@@ -23,8 +23,8 @@
             </ul>
         </div>
 
-        <script type="text/javascript" src="js/libs/angular.js"></script>
-        <script type="text/javascript" src="js/src/angular-mobile-keyboard.js"></script>
+        <script type="text/javascript" src="./js/libs/angular.js"></script>
+        <script type="text/javascript" src="../dist/js/angular-mobile-keyboard.js"></script>
         <script type="text/javascript">
             var myApp = angular.module("myApp", ["ngMobileKeyboard"]);
             myApp.controller("testCtrl", function($scope) {
