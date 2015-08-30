@@ -43,7 +43,7 @@
                     setTimeout(function() {
                         ele[0].focus();
                         window.ele = ele[0];
-                    });
+                    }, 0);
                 }
             }
         }
@@ -87,6 +87,13 @@
 
                 scope.showKeyboard = function() {
                     return scope.kbIdx != -1;
+                };
+                
+                scope.getNextKbName = function() {
+                    return scope.kbTypes[(scope.kbIdx + 1) % scope.kbTypes.length];
+                };
+                scope.getSwitchCharText = function() {
+                    return scope.isNum ? "#+=": "123";   
                 };
 
                 function showKeyboard() {
@@ -171,6 +178,13 @@
                     },
                     enter: function() {
 
+                    },
+                    switch: function() {
+                        scope.isNum = true;
+                        return scope.kbIdx = (scope.kbIdx + 1) % scope.kbTypes.length;
+                    },
+                    switchChar: function() {
+                        scope.isNum = !scope.isNum; 
                     }
                 }
 
@@ -188,4 +202,4 @@
     }
 })(window);
 
-angular.module("ngMobileKeyboard").run(["$templateCache", function($templateCache) {$templateCache.put("template/ngKeyboard.html","<div id=\"virtualKb\" class=\"kb-ctner\" ng-class=\"{\'active\': showKeyboard}\">\n    <ul ng-show=\"showCurrKb(\'ABC\')\">\n        <li>\n            <button>Q</button>\n            <button>W</button>\n            <button>E</button>\n            <button>R</button>\n            <button>T</button>\n            <button>Y</button>\n            <button>U</button>\n            <button>I</button>\n            <button>O</button>\n            <button>P</button>\n        </li>\n        <li>\n            <button>A</button>\n            <button>S</button>\n            <button>D</button>\n            <button>F</button>\n            <button>G</button>\n            <button>H</button>\n            <button>J</button>\n            <button>K</button>\n            <button>L</button>\n        </li>\n        <li>\n            <button class=\"func button-caps pull-left\" ng-class=\"{\'active\': isCap}\" data-func=\"caps\">Caps</button>\n            <button>Z</button>\n            <button>X</button>\n            <button>C</button>\n            <button>V</button>\n            <button>B</button>\n            <button>N</button>\n            <button>M</button>\n            <button class=\"func button-del pull-right\" data-func=\"backspace\">DEL</button>\n        </li>\n        <li>\n            <button class=\"func switch\" data-func=\"switch\">123</button>\n            <button class=\"func\">SMILE</button>\n            <button class=\"space\" data-value=\" \">space</button>\n            <button>.</button>\n            <button class=\"func enter\" data-func=\"enter\">Go</button>\n        </li>\n    </ul>\n\n</div>\n");}]);
+angular.module("ngMobileKeyboard").run(["$templateCache", function($templateCache) {$templateCache.put("template/ngKeyboard.html","<div id=\"virtualKb\" class=\"kb-ctner\" ng-class=\"{\'active\': showKeyboard}\">\n    <ul ng-show=\"showCurrKb(\'ABC\')\">\n        <li>\n            <button>Q</button>\n            <button>W</button>\n            <button>E</button>\n            <button>R</button>\n            <button>T</button>\n            <button>Y</button>\n            <button>U</button>\n            <button>I</button>\n            <button>O</button>\n            <button>P</button>\n        </li>\n        <li>\n            <button>A</button>\n            <button>S</button>\n            <button>D</button>\n            <button>F</button>\n            <button>G</button>\n            <button>H</button>\n            <button>J</button>\n            <button>K</button>\n            <button>L</button>\n        </li>\n        <li>\n            <button class=\"func button-caps pull-left\" ng-class=\"{\'active\': isCap}\" data-func=\"caps\">Caps</button>\n            <button>Z</button>\n            <button>X</button>\n            <button>C</button>\n            <button>V</button>\n            <button>B</button>\n            <button>N</button>\n            <button>M</button>\n            <button class=\"func button-del pull-right\" data-func=\"backspace\">DEL</button>\n        </li>\n        <li>\n            <button class=\"func switch switch-num\" ng-disabled=\"getNextKbName() == kbTypes[kbIdx]\" data-func=\"switch\" ng-bind=\"getNextKbName()\"></button>\n            <button class=\"space\" data-value=\" \">space</button>\n            <button>.</button>\n            <button class=\"func enter\" data-func=\"enter\">Go</button>\n        </li>\n    </ul>\n    <ul ng-show=\"showCurrKb(\'123\')\">\n        <li ng-show=\"isNum\">\n            <button>1</button>\n            <button>2</button>\n            <button>3</button>\n            <button>4</button>\n            <button>5</button>\n            <button>6</button>\n            <button>7</button>\n            <button>8</button>\n            <button>9</button>\n            <button>0</button>\n        </li>\n        <li ng-show=\"isNum\">\n            <button>-</button>\n            <button>/</button>\n            <button>:</button>\n            <button>;</button>\n            <button>(</button>\n            <button>)</button>\n            <button>$</button>\n            <button>&</button>\n            <button>@</button>\n            <button>\"</button>\n        </li>\n\n        <li ng-show=\"!isNum\">\n            <button>[</button>\n            <button>]</button>\n            <button>{</button>\n            <button>}</button>\n            <button>#</button>\n            <button>%</button>\n            <button>^</button>\n            <button>*</button>\n            <button>+</button>\n            <button>=</button>\n        </li>\n        <li ng-show=\"!isNum\">\n            <button>_</button>\n            <button>\\</button>\n            <button>|</button>\n            <button>~</button>\n            <button data-value=\"<\"><</button>\n            <button data-value=\">\">></button>\n            <button>€</button>\n            <button>£</button>\n            <button>¥</button>\n            <button>•</button>\n        </li>\n        <li>\n            <button class=\"func pull-left switch\" data-func=\"switchChar\" ng-bind=\"getSwitchCharText()\"></button>\n            <button class=\"lg\">.</button>\n            <button class=\"lg\">,</button>\n            <button class=\"lg\">?</button>\n            <button class=\"lg\">!</button>\n            <button class=\"lg\">\'</button>\n            <button class=\"func button-del pull-right\" data-func=\"backspace\">DEL</button>\n        </li>\n        <li>\n            <button class=\"func switch switch-num\" data-func=\"switch\" ng-bind=\"getNextKbName()\"></button>\n            <button class=\"space\" data-value=\" \">space</button>\n            <button>.</button>\n            <button class=\"func enter\" data-func=\"enter\">Go</button>\n        </li>\n    </ul>\n</div>\n");}]);

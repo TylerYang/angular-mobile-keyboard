@@ -43,7 +43,7 @@
                     setTimeout(function() {
                         ele[0].focus();
                         window.ele = ele[0];
-                    });
+                    }, 0);
                 }
             }
         }
@@ -87,6 +87,13 @@
 
                 scope.showKeyboard = function() {
                     return scope.kbIdx != -1;
+                };
+                
+                scope.getNextKbName = function() {
+                    return scope.kbTypes[(scope.kbIdx + 1) % scope.kbTypes.length];
+                };
+                scope.getSwitchCharText = function() {
+                    return scope.isNum ? "#+=": "123";   
                 };
 
                 function showKeyboard() {
@@ -171,6 +178,13 @@
                     },
                     enter: function() {
 
+                    },
+                    switch: function() {
+                        scope.isNum = true;
+                        return scope.kbIdx = (scope.kbIdx + 1) % scope.kbTypes.length;
+                    },
+                    switchChar: function() {
+                        scope.isNum = !scope.isNum; 
                     }
                 }
 

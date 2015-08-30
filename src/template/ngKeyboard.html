@@ -35,12 +35,76 @@
             <button class="func button-del pull-right" data-func="backspace">DEL</button>
         </li>
         <li>
-            <button class="func switch" data-func="switch">123</button>
-            <button class="func">SMILE</button>
+            <button class="func switch switch-num" ng-disabled="getNextKbName() == kbTypes[kbIdx]" data-func="switch" ng-bind="getNextKbName()"></button>
             <button class="space" data-value=" ">space</button>
             <button>.</button>
             <button class="func enter" data-func="enter">Go</button>
         </li>
     </ul>
+    <ul ng-show="showCurrKb('123')">
+        <li ng-show="isNum">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>0</button>
+        </li>
+        <li ng-show="isNum">
+            <button>-</button>
+            <button>/</button>
+            <button>:</button>
+            <button>;</button>
+            <button>(</button>
+            <button>)</button>
+            <button>$</button>
+            <button>&</button>
+            <button>@</button>
+            <button>"</button>
+        </li>
 
+        <li ng-show="!isNum">
+            <button>[</button>
+            <button>]</button>
+            <button>{</button>
+            <button>}</button>
+            <button>#</button>
+            <button>%</button>
+            <button>^</button>
+            <button>*</button>
+            <button>+</button>
+            <button>=</button>
+        </li>
+        <li ng-show="!isNum">
+            <button>_</button>
+            <button>\</button>
+            <button>|</button>
+            <button>~</button>
+            <button data-value="<"><</button>
+            <button data-value=">">></button>
+            <button>€</button>
+            <button>£</button>
+            <button>¥</button>
+            <button>•</button>
+        </li>
+        <li>
+            <button class="func pull-left switch" data-func="switchChar" ng-bind="getSwitchCharText()"></button>
+            <button class="lg">.</button>
+            <button class="lg">,</button>
+            <button class="lg">?</button>
+            <button class="lg">!</button>
+            <button class="lg">'</button>
+            <button class="func button-del pull-right" data-func="backspace">DEL</button>
+        </li>
+        <li>
+            <button class="func switch switch-num" data-func="switch" ng-bind="getNextKbName()"></button>
+            <button class="space" data-value=" ">space</button>
+            <button>.</button>
+            <button class="func enter" data-func="enter">Go</button>
+        </li>
+    </ul>
 </div>
