@@ -17,9 +17,10 @@
   padding-top: 1% 
   font-family: sans-serif
   font-shadow:none
-  -webkit-font-smoothing: antialiased
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004)
-  
+  -webkit-font-smoothing: antialiased
+  -webkit-user-select: none 
+  -webkit-touch-callout: none
   
   
   &.active
@@ -53,6 +54,9 @@
     border-bottom: 1px solid #888A8E
     outline: none
     height: 42px
+    -ms-touch-action: none 
+    touch-action: none 
+
     &.lg
       width: 12.3%
     &.func

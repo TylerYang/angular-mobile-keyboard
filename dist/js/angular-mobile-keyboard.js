@@ -4,7 +4,7 @@
         kbId: "virtualKb",
         dev: true
     };
-    var activeEvent = "touchstart" in window ? "touchstart" : "click";
+    var activeEvent = "ontouchstart" in window ? "touchstart" : "click";
     function isContains(p, c) {
         while(p != c && c != null) {
             c = c.parentElement;
@@ -69,6 +69,8 @@
                     targetEle = data.target;
 
                     addAutoHideEvent();
+                    preventDocumentMove();
+                    
                     showKeyboard();
                     if(!scope.$$phase) {
                         scope.$apply();
@@ -102,10 +104,21 @@
 
                 function hideKeyboard() {
                     removeAutoHideEvent();
+                    removeDocumentMoveHandler();
+
                     scope.kbIdx = -1;
                     if(!scope.$$phase) {
                         scope.$apply();
                     }
+                }
+                function preventDocumentMove() {
+                    $document.bind("touchmove");
+                }
+                function removeDocumentMoveHandler() {
+                    $document.unbind("touchmove", moveHandler);
+                }
+                function moveHandler(e) {
+                    e.preventDefault();
                 }
                 function addAutoHideEvent() {
                     $document.bind(activeEvent, documentHandler);
@@ -133,6 +146,7 @@
                         if(!scope.$$phase) scope.$apply();
                     });
                     //disable right click 
+                    return;
                     if(config.dev == true) return;
                     document.getElementById(config.kbId).oncontextmenu = function() {
                         return false;
@@ -161,7 +175,8 @@
                     }
                     updateTimer = setTimeout(function() {
                         targetEle.value = bufferValue; 
-                    }, 100);
+                        updateTimer = null;
+                    }, 10);
                 }
                 function isNormalButton(button) {
                     return !button.getAttribute("data-func");
